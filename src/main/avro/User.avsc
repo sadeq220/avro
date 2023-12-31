@@ -1,0 +1,9 @@
+{
+  "namespace": "cloud.shareApp",
+  "name": "User",
+  "type": "record",
+  "fields": [
+    {"name": "name", "type": "string"},
+    {"name": "favourite_number",  "type": ["int", "null"]}
+  ]
+}
