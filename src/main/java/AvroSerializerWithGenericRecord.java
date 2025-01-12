@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 /**
+ * Avro specifies two serialization encodings: binary and JSON.
  * serialize a generic record to avro json encoding(differs from plain json as it uses manifest typing) and binary encoding
  * this example doesn't use the code generation, instead we use GenericRecord.
  *
@@ -36,12 +37,12 @@ public class AvroSerializerWithGenericRecord {
             BinaryEncoder binaryEncoder = binaryEncoder(byteArrayOutputStream);
             genericDatumWriter.write(avroRecord,binaryEncoder);
             binaryEncoder.flush();
-            logger.info("serialized binary datum: {}", Hex.encodeHexString(byteArrayOutputStream.toByteArray()));
+            logger.info("serialized to binary encoding datum: {}", Hex.encodeHexString(byteArrayOutputStream.toByteArray()));
             byteArrayOutputStream.reset();
             JsonEncoder jsonEncoder = jsonEncoder(byteArrayOutputStream, schema);
             genericDatumWriter.write(avroRecord,jsonEncoder);
             jsonEncoder.flush();
-            logger.info("serialized json   datum: {}",byteArrayOutputStream.toString());
+            logger.info("serialized to json encoding datum: {}",byteArrayOutputStream.toString());
         }catch (IOException e){
             logger.error("avro serialization failed!",e);
         }
